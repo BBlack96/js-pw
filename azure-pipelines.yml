@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+>>>>>>> b1e46f3c2e3477e82584b2e7793b3f0c4b4ebd5a
 trigger:
 - main
 
@@ -14,7 +22,11 @@ steps:
   displayName: 'npm ci'
 - script: npx playwright install --with-deps
   displayName: 'Install Playwright browsers'
+<<<<<<< HEAD
 - script: npx playwright test --update-snapshots --headed
+=======
+- script: npx playwright test --update-snapshots
+>>>>>>> b1e46f3c2e3477e82584b2e7793b3f0c4b4ebd5a
   displayName: 'Run Playwright tests'
   env:
     CI: 'true'
