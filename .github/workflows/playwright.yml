@@ -15,13 +15,19 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
+
+    - name: Install Xvfb
+      run: sudo apt-get install -y xvfb
+
     - name: Start Xvfb
       run: |
         sudo apt-get install xvfb
         Xvfb :99 -ac &
         export DISPLAY=:99
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+      
     - name: Run Playwright tests
       run: npx playwright test --update-snapshots --headed
     - uses: actions/upload-artifact@v4
