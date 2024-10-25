@@ -1,19 +1,39 @@
+# Триггер для запуска пайплайна при пуше в ветку main
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18'
-  displayName: 'Install Node.js'
-- script: npm ci
-  displayName: 'npm ci'
-- script: npx playwright install --with-deps
-  displayName: 'Install Playwright browsers'
-- script: npx playwright test --update-snapshots --headed
-  displayName: 'Run Playwright tests'
-  env:
-    CI: 'true'
+  # Установка Node.js
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18'  # Устанавливаем Node.js версии 18
+    displayName: 'Install Node.js'
+
+  # Установка Xvfb для виртуального X Server
+  - script: |
+      sudo apt-get update
+      sudo apt-get install -y xvfb
+    displayName: 'Install Xvfb'
+
+  # Запуск Xvfb
+  - script: |
+      Xvfb :99 -ac &
+      export DISPLAY=:99
+    displayName: 'Start Xvfb'
+
+  # Установка зависимостей проекта
+  - script: npm ci
+    displayName: 'Install project dependencies'
+
+  # Установка браузеров Playwright
+  - script: npx playwright install --with-deps
+    displayName: 'Install Playwright browsers'
+
+  # Запуск тестов Playwright в headed режиме с обновлением эталонных скриншотов
+  - script: npx playwright test --update-snapshots --headed
+    displayName: 'Run Playwright tests'
+    env:
+      DISPLAY: :99  # Установка переменной окружения для использования Xvfb
