@@ -1,18 +1,15 @@
 pipeline {
     agent {
         docker {
-            image 'mcr.microsoft.com/playwright:v1.48.1-noble' // Используем официальный Docker-образ Playwright
+            image 'mcr.microsoft.com/playwright:v1.48.1-noble'
+            args '-v /c/Users/demo/AppData/Local/Jenkins/.jenkins/workspace/test:/workspace -w /workspace'
         }
     }
     stages {
-        stage('Install Dependencies') {
+        stage('Test') {
             steps {
-                sh 'npm ci' // Установка зависимостей
-            }
-        }
-        stage('Run Playwright Tests') {
-            steps {
-                sh 'npx playwright test' // Запуск тестов
+                sh 'npm ci'
+                sh 'npx playwright test'
             }
         }
     }
