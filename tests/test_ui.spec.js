@@ -15,10 +15,10 @@ const devices = {
 // Языки
 const languages = [
   "en",
-  // "cs", "de", "es", "el", "fr", "hu", "fi", "is", "et", "hi", "yue",
-  // "th", "bn", "ms", "ko", "hr", "zh-CN", "ga", "id", "ja", "sv", "it", "bg",
-  // "sr", "uk", "he", "sk", "da", "ar", "nl", "no", "pl", "cz", "pt", "ro",
-  // "sl", "tr", "pt-br"
+  "cs", "de", "es", "el", "fr", "hu", "fi", "is", "et", "hi", "yue",
+  "th", "bn", "ms", "ko", "hr", "zh-CN", "ga", "id", "ja", "sv", "it", "bg",
+  "sr", "uk", "he", "sk", "da", "ar", "nl", "no", "pl", "cz", "pt", "ro",
+  "sl", "tr", "pt-br"
 ];
 
 // Страницы
